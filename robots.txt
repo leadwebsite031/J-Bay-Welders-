@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.jbaywelding.co.za/sitemap.xml
