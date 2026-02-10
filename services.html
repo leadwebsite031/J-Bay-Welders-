@@ -1,31 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services | J-Bay Welding</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--light); padding-top: 70px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; }
+        .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; }
+        .header span { color: var(--primary); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 30px; border-bottom: 5px solid var(--primary); text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; }
+    </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">J-BAY <span>WELDING</span></div>
+        <a href="index.html" class="logo">J-BAY <span>WELDING</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="services.html">Services</a></li>
             <li><a href="maintenance.html">Maintenance</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <header class="page-header">
-        <h1>Our Services</h1>
-    </header>
+    <header class="header"><h1>Our <span>Services</span></h1></header>
     <div class="container">
-        <div class="service-grid">
-            <div class="service-card"><i class="fas fa-gate"></i><h3>Security Gates</h3><p>Custom property security gates and burglar bars.</p></div>
-            <div class="service-card"><i class="fas fa-truck"></i><h3>Vehicle Welding</h3><p>Trailers, reinforcements, and custom fabrication.</p></div>
-            <div class="service-card"><i class="fas fa-magic"></i><h3>Stainless Polishing</h3><p>Clean finishes built to survive the coastal air.</p></div>
+        <div class="grid">
+            <div class="card"><h3>Security Gates</h3><p>Custom gates and burglar bars built for maximum security.</p></div>
+            <div class="card"><h3>Vehicle Welding</h3><p>Trailers, chassis reinforcements, and custom vehicle work.</p></div>
+            <div class="card"><h3>Steel Fabrication</h3><p>General steelwork for residential and commercial projects.</p></div>
         </div>
     </div>
+    <footer><p>&copy; 2026 J-Bay Welding</p></footer>
 </body>
 </html>
