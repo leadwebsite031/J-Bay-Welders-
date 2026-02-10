@@ -1,27 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Rust Prevention | J-Bay Welding</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance | J-Bay Welding</title>
+    <style>
+        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--light); padding-top: 70px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; }
+        .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; }
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 5%; background: white; margin-top: 40px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius: 8px; }
+        h2 { color: var(--primary); margin-bottom: 20px; }
+        footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; margin-top: 50px; }
+    </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">J-BAY <span>WELDING</span></div>
+        <a href="index.html" class="logo">J-BAY <span>WELDING</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
-            <li><a href="maintenance.html" class="active">Maintenance</a></li>
+            <li><a href="maintenance.html">Maintenance</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <header class="page-header">
-        <h1>Maintenance & Rust Prevention</h1>
-    </header>
+    <header class="header"><h1>Rust Prevention</h1></header>
     <div class="container">
-        <h2 class="section-title">Coastal Care Guide</h2>
-        <p>Living in J-Bay means salt is your enemy. We offer professional polishing and anti-corrosion treatments to keep your steel strong.</p>
+        <h2>Stainless Steel Polishing</h2>
+        <p>Living near the ocean in Jeffreys Bay means salt air will damage your steel. We specialized in stainless steel polishing to deliver a clean finish that lasts and resists corrosion.</p>
     </div>
+    <footer><p>&copy; 2026 J-Bay Welding</p></footer>
 </body>
 </html>
