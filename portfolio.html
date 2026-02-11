@@ -1,30 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | J-Bay Welding</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--light); padding-top: 70px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; }
+        .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 5%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .img-box { height: 300px; background: #ddd; display: flex; align-items: center; justify-content: center; color: #777; font-weight: bold; border-radius: 5px; }
+        footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; }
+    </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">J-BAY <span>WELDING</span></div>
+        <a href="index.html" class="logo">J-BAY <span>WELDING</span></a>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="maintenance.html">Maintenance</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
-    <header class="page-header">
-        <h1>Our Completed Projects</h1>
-    </header>
+    <header class="header"><h1>Our Work</h1></header>
     <div class="container">
-        <div class="service-grid">
-            <div class="service-card" style="height: 250px;">[Project Image 1]</div>
-            <div class="service-card" style="height: 250px;">[Project Image 2]</div>
-            <div class="service-card" style="height: 250px;">[Project Image 3]</div>
+        <div class="grid">
+            <div class="img-box">Project: Security Gates</div>
+            <div class="img-box">Project: Trailer Reinforcement</div>
+            <div class="img-box">Project: Stainless Polishing</div>
         </div>
     </div>
+    <footer><p>&copy; 2026 J-Bay Welding</p></footer>
 </body>
 </html>
