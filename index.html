@@ -4,24 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>J-Bay Welding | Professional Steel Fabrication</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; --white: #ffffff; }
+        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; --white: #ffffff; --primary-dark: #d35400; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--light); padding-top: 70px; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; }
-        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        body { background-color: var(--light); padding-top: 70px; scroll-behavior: smooth; }
+        
+        /* --- Navbar Enhancements --- */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; letter-spacing: 1px; }
         .logo span { color: var(--primary); }
         .nav-links { display: flex; list-style: none; }
-        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; }
+        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
         .nav-links li a:hover { color: var(--primary); }
-        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80'); background-size: cover; height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 5%; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        
+        /* --- Hero Section Enhancements --- */
+        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80'); background-size: cover; background-position: center; height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 5%; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 15px; line-height: 1.1; animation: fadeInUp 0.8s ease; }
         .hero h1 span { color: var(--primary); }
-        .btn { background: var(--primary); color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; display: inline-block; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 5%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 30px; border-bottom: 5px solid var(--primary); text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 25px; opacity: 0.9; animation: fadeInUp 1s ease; }
+        
+        .hero-stats { display: flex; gap: 30px; margin-top: 20px; animation: fadeInUp 1.2s ease; }
+        .stat-item { text-align: center; }
+        .stat-item span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .stat-item label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .btn { background: var(--primary); color: white; padding: 16px 35px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; display: inline-block; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; border: none; cursor: pointer; }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4); }
+        
+        /* --- Container & Grid --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 5%; }
+        .section-intro { text-align: center; margin-bottom: 50px; }
+        .section-intro h2 { font-size: 2.5rem; color: var(--dark); margin-bottom: 10px; }
+        .section-intro .bar { width: 70px; height: 4px; background: var(--primary); margin: 0 auto; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 40px 30px; border-bottom: 5px solid var(--primary); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; border-radius: 4px; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; display: block; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--dark); }
+        .card p { color: #666; font-size: 1rem; }
+
+        /* --- WhatsApp Float --- */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 2px 5px 15px rgba(0,0,0,0.3); z-index: 1000; transition: 0.3s; text-decoration: none; }
+        .whatsapp-float:hover { transform: scale(1.1); background: #128c7e; }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer { background: var(--dark); color: #888; padding: 40px 0; text-align: center; border-top: 3px solid var(--primary); }
+        footer p { font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -36,18 +71,51 @@
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
+
     <section class="hero">
         <h1>Solid Workmanship.<br><span>No Shortcuts.</span></h1>
-        <p>Expert Welding & Steel Fabrication in Jeffreys Bay.</p>
-        <a href="contact.html" class="btn">Get A Quote</a>
+        <p>Expert Welding & Precision Steel Fabrication serving Jeffreys Bay, St Francis, and Humansdorp.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item"><span>100%</span><label>Reliability</label></div>
+            <div class="stat-item"><span>5-Star</span><label>Service</label></div>
+            <div class="stat-item"><span>Bespoke</span><label>Designs</label></div>
+        </div>
+
+        <a href="contact.html" class="btn">Start Your Project</a>
     </section>
+
     <div class="container">
+        <div class="section-intro">
+            <h2>Why Choose J-Bay Welding?</h2>
+            <div class="bar"></div>
+        </div>
         <div class="grid">
-            <div class="card"><h3>Reliable Service</h3><p>We show up on time and get the job done right the first time.</p></div>
-            <div class="card"><h3>Quality Materials</h3><p>We only use industrial-grade steel for long-lasting results.</p></div>
-            <div class="card"><h3>Expert Craft</h3><p>Bespoke welding solutions tailored to your specific needs.</p></div>
+            <div class="card">
+                <i class="fas fa-tools"></i>
+                <h3>Reliable Service</h3>
+                <p>We respect your time. We show up as scheduled and get the job done right the first time, every time.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Quality Materials</h3>
+                <p>J-Bay's salt air is tough. We only use industrial-grade steel and protective finishes for long-lasting results.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-hammer"></i>
+                <h3>Expert Craft</h3>
+                <p>From security gates to intricate decorative steelwork, our solutions are tailored to your specific vision.</p>
+            </div>
         </div>
     </div>
-    <footer><p>&copy; 2026 J-Bay Welding</p></footer>
+
+    <a href="https://wa.me/YOURNUMBER" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <p>&copy; 2026 J-Bay Welding | Jeffreys Bay Steel Specialists</p>
+        <p style="margin-top: 10px; font-size: 0.7rem; color: #555;">Quality Workmanship • Security Solutions • Rust Prevention</p>
+    </footer>
 </body>
 </html>
