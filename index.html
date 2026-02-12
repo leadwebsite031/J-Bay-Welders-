@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--light); padding-top: 70px; scroll-behavior: smooth; }
         
-        /* --- Navbar Enhancements --- */
+        /* --- Navbar --- */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; letter-spacing: 1px; }
         .logo span { color: var(--primary); }
@@ -19,10 +19,22 @@
         .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
         .nav-links li a:hover { color: var(--primary); }
 
-        /* Mobile Menu Toggle */
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: white; }
+        /* Mobile Menu Box (The "3 Strikes" Box) */
+        .menu-toggle { 
+            display: none; 
+            background: var(--primary); 
+            color: var(--dark); 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 5px; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 1.4rem; 
+            cursor: pointer; 
+            transition: 0.3s;
+        }
         
-        /* --- Hero Section Enhancements --- */
+        /* --- Hero Section --- */
         .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80'); background-size: cover; background-position: center; height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 0 5%; }
         .hero h1 { font-size: clamp(2.2rem, 8vw, 4rem); margin-bottom: 15px; line-height: 1.1; animation: fadeInUp 0.8s ease; }
         .hero h1 span { color: var(--primary); }
@@ -34,7 +46,6 @@
         .stat-item label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .btn { background: var(--primary); color: white; padding: 14px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; display: inline-block; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; border: none; cursor: pointer; }
-        .btn:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(243, 156, 18, 0.4); }
         
         /* --- Container & Grid --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 60px 5%; }
@@ -44,7 +55,6 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .card { background: white; padding: 35px 25px; border-bottom: 5px solid var(--primary); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; border-radius: 4px; }
-        .card:hover { transform: translateY(-10px); }
         .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; display: block; }
         .card h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--dark); }
         .card p { color: #666; font-size: 1rem; line-height: 1.5; }
@@ -54,40 +64,37 @@
         .whatsapp-float, .fb-float { color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 25px; box-shadow: 2px 5px 15px rgba(0,0,0,0.3); transition: 0.3s; text-decoration: none; }
         .whatsapp-float { background: #25d366; }
         .fb-float { background: #1877F2; }
-        .whatsapp-float:hover, .fb-float:hover { transform: scale(1.1); }
 
-        /* --- Animations --- */
+        /* --- Mobile Responsive Rules --- */
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; } /* Show the box */
+            .nav-links { 
+                position: absolute; top: 70px; left: -100%; width: 100%; height: auto; 
+                background: var(--dark); flex-direction: column; text-align: center; 
+                transition: 0.4s; padding: 20px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                border-top: 1px solid #333;
+            }
+            .nav-links.active { left: 0; }
+            .nav-links li { margin: 15px 0; }
+            .hero { height: 80vh; }
+        }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- MOBILE RESPONSIVENESS --- */
-        @media (max-width: 768px) {
-            .menu-toggle { display: block; }
-            .nav-links { 
-                position: absolute; top: 70px; left: -100%; width: 100%; height: auto; 
-                background: var(--dark); flex-direction: column; text-align: center; 
-                transition: 0.4s; padding: 20px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            }
-            .nav-links.active { left: 0; }
-            .nav-links li { margin: 15px 0; }
-            
-            .hero { height: 75vh; }
-            .hero-stats { gap: 15px; }
-            .container { padding: 40px 5%; }
-        }
-
         footer { background: var(--dark); color: #888; padding: 40px 0; text-align: center; border-top: 3px solid var(--primary); }
-        footer p { font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <a href="index.html" class="logo">J-BAY <span>WELDING</span></a>
+        
         <div class="menu-toggle" id="mobile-menu">
             <i class="fas fa-bars"></i>
         </div>
+
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="services.html">Services</a></li>
@@ -107,7 +114,6 @@
             <div class="stat-item"><span>5-Star</span><label>Service</label></div>
             <div class="stat-item"><span>Bespoke</span><label>Designs</label></div>
         </div>
-
         <a href="contact.html" class="btn">Start Your Project</a>
     </section>
 
@@ -120,17 +126,17 @@
             <div class="card">
                 <i class="fas fa-tools"></i>
                 <h3>Reliable Service</h3>
-                <p>We respect your time. We show up as scheduled and get the job done right the first time, every time.</p>
+                <p>We respect your time. We show up as scheduled and get the job done right the first time.</p>
             </div>
             <div class="card">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Quality Materials</h3>
-                <p>J-Bay's salt air is tough. We only use industrial-grade steel and protective finishes for long-lasting results.</p>
+                <p>Industrial-grade steel and protective finishes for long-lasting results in salt air.</p>
             </div>
             <div class="card">
                 <i class="fas fa-hammer"></i>
                 <h3>Expert Craft</h3>
-                <p>From security gates to intricate decorative steelwork, our solutions are tailored to your specific vision.</p>
+                <p>From security gates to intricate decorative steelwork tailored to your vision.</p>
             </div>
         </div>
     </div>
@@ -145,19 +151,15 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 J-Bay Welding | Jeffreys Bay Steel Specialists</p>
-        <p style="margin-top: 5px;">Contact: 066 354 4654</p>
-        <p style="margin-top: 10px; font-size: 0.7rem; color: #555;">Quality Workmanship • Security Solutions • Rust Prevention</p>
+        <p>&copy; 2026 J-Bay Welding | 066 354 4654</p>
     </footer>
 
     <script>
-        // Simple logic to open/close the mobile menu
         const menu = document.querySelector('#mobile-menu');
         const navLinks = document.querySelector('.nav-links');
 
         menu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Toggle between bars and X icon
             const icon = menu.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
