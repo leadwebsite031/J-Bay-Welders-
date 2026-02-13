@@ -3,169 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>J-Bay Welding | Portfolio</title>
+    <title>Portfolio | J-Bay Welding</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { 
-            --gold: #f39c12; 
-            --black: #0a0a0a; 
-            --gray: #1a1a1a;
-            --white: #ffffff;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background-color: var(--black); color: var(--white); line-height: 1.6; }
-
-        /* Navigation */
-        nav { 
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 0 5%; background: rgba(0,0,0,0.9); 
-            position: fixed; width: 100%; top: 0; height: 70px; z-index: 1000;
-            border-bottom: 2px solid var(--gold);
-        }
-        .logo { font-size: 1.4rem; font-weight: 800; color: white; text-decoration: none; }
-        .logo span { color: var(--gold); }
-
-        /* Header */
-        header { 
-            padding: 120px 5% 40px; text-align: center; 
-            background: linear-gradient(to bottom, #151515, #0a0a0a);
-        }
-        header h1 { font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px; }
-        header p { color: var(--gold); letter-spacing: 2px; font-weight: 300; }
-
-        /* Portfolio Grid */
-        .portfolio-container { max-width: 1200px; margin: 0 auto; padding: 40px 5%; }
+        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; --primary-dark: #d35400; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--light); padding-top: 70px; }
         
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 25px; 
-        }
-
-        .card { 
-            background: var(--gray);
-            border-radius: 5px;
-            overflow: hidden;
-            border: 1px solid #333;
-            transition: 0.3s ease;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-
-        .img-container { 
-            flex: 1; 
-            overflow: hidden; 
-            background: #222; /* Placeholder color */
-            position: relative;
-        }
-
-        .img-container img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            display: block;
-        }
-
-        .details { padding: 20px; background: #111; border-top: 1px solid #222; }
-        .details h3 { color: var(--gold); font-size: 1rem; text-transform: uppercase; margin-bottom: 5px; }
-        .details p { font-size: 0.85rem; opacity: 0.7; }
-
-        footer { text-align: center; padding: 40px; border-top: 1px solid #222; margin-top: 40px; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; }
+        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
+        .nav-links li a:hover { color: var(--primary); }
         
-        /* Mobile Hamburger */
-        .mobile-btn { display: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
+        .menu-toggle { display: none; background: var(--primary); color: var(--dark); width: 45px; height: 45px; border-radius: 5px; justify-content: center; align-items: center; font-size: 1.4rem; cursor: pointer; transition: 0.3s; }
+
+        .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; border-bottom: 5px solid var(--primary); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 5%; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .img-box { height: 350px; background: #222; border-radius: 8px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #333; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        .img-overlay { position: absolute; bottom: 0; background: rgba(0,0,0,0.8); width: 100%; color: white; padding: 15px; text-align: center; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid var(--primary); }
+
+        footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; border-top: 3px solid var(--primary); }
 
         @media (max-width: 768px) {
-            .mobile-btn { display: block; }
-            .nav-links { display: none; }
+            .menu-toggle { display: flex; } 
+            .nav-links { position: absolute; top: 70px; left: -100%; width: 100%; height: auto; background: var(--dark); flex-direction: column; text-align: center; transition: 0.4s; padding: 20px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2); border-top: 1px solid #333; }
+            .nav-links.active { left: 0; }
+            .nav-links li { margin: 15px 0; }
+            .header h1 { font-size: 2rem; }
             .grid { grid-template-columns: 1fr; }
+            .img-box { height: 300px; }
         }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">J-BAY <span>WELDING</span></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="maintenance.html">Maintenance</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
-<nav>
-    <a href="#" class="logo">J-BAY <span>WELDING</span></a>
-    <div class="mobile-btn"><i class="fas fa-bars"></i></div>
-</nav>
+    <header class="header">
+        <h1>Our Portfolio</h1>
+        <p style="margin-top:10px; color: var(--primary);">Quality Steelwork & Professional Welding</p>
+    </header>
 
-<header>
-    <h1>Project Portfolio</h1>
-    <p>PRECISION STEELWORK & FABRICATION</p>
-</header>
-
-<div class="portfolio-container">
-    <div class="grid">
-
-        <div class="card">
-            <div class="img-container">
-                <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Carport Build">
+    <div class="container">
+        <div class="grid">
+            <div class="img-box">
+                <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Carport Project">
+                <div class="img-overlay">Residential Carports</div>
             </div>
-            <div class="details">
-                <h3>Steel Carports</h3>
-                <p>Custom residential carport structures.</p>
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="img-container">
-                <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Commercial Frame">
+            <div class="img-box">
+                <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Steel Frame">
+                <div class="img-overlay">Structural Steel Framing</div>
             </div>
-            <div class="details">
-                <h3>Commercial Framing</h3>
-                <p>Heavy-duty structural steel frames.</p>
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="img-container">
+            <div class="img-box">
                 <img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif" alt="Shade Structure">
+                <div class="img-overlay">Shade Sail Supports</div>
             </div>
-            <div class="details">
-                <h3>Shade Solutions</h3>
-                <p>Cantilevered shade sail supports.</p>
+
+            <div class="img-box">
+                <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Boundary Carport">
+                <div class="img-overlay">Custom Boundary Carports</div>
+            </div>
+
+            <div class="img-box">
+                <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Technical Welding">
+                <div class="img-overlay">Technical Steel Repairs</div>
+            </div>
+
+            <div class="img-box">
+                <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Restoration">
+                <div class="img-overlay">Rust Restoration</div>
             </div>
         </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Side Carport">
-            </div>
-            <div class="details">
-                <h3>Boundary Builds</h3>
-                <p>Optimized side-alley carports.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Specialized Welding">
-            </div>
-            <div class="details">
-                <h3>Technical Repairs</h3>
-                <p>Automotive and specialized steel repair.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Surface Restoration">
-            </div>
-            <div class="details">
-                <h3>Restoration</h3>
-                <p>Rust treatment and surface reinforcement.</p>
-            </div>
-        </div>
-
     </div>
-</div>
 
-<footer>
-    <p><strong>J-BAY WELDING</strong> | 066 354 4654</p>
-    <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 10px;">© 2026 Jeffreys Bay, South Africa</p>
-</footer>
+    <footer>
+        <p>&copy; 2026 J-Bay Welding | Jeffreys Bay | 066 354 4654</p>
+    </footer>
 
+    <script>
+        const menu = document.querySelector('#mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        menu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
 </body>
 </html>
