@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; --primary-dark: #d35400; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--light); padding-top: 70px; }
         
         /* Navbar */
@@ -18,7 +18,7 @@
         .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
         .nav-links li a:hover { color: var(--primary); }
         
-        /* Mobile Menu Toggle Box */
+        /* Mobile Menu Toggle */
         .menu-toggle { 
             display: none; 
             background: var(--primary); 
@@ -36,17 +36,23 @@
         .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; border-bottom: 5px solid var(--primary); }
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 5%; }
         
-        /* --- Hard-Coded Grid --- */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        /* --- Refined Portfolio Grid --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
         
         .img-box { 
-            height: 350px; 
+            height: 400px; 
             background: #222; 
-            border-radius: 8px; 
+            border-radius: 4px; 
             overflow: hidden; 
             position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            border: 2px solid #333;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            border: 1px solid #ddd;
+            transition: transform 0.4s ease;
+        }
+
+        .img-box:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
         }
 
         .img-box img { 
@@ -54,24 +60,40 @@
             height: 100%; 
             object-fit: cover; 
             display: block; 
+            transition: transform 0.6s ease;
+        }
+
+        .img-box:hover img {
+            transform: scale(1.05);
         }
 
         .img-overlay {
             position: absolute;
             bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             width: 100%;
             color: white;
-            padding: 15px;
+            padding: 25px 15px;
             text-align: center;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; border-top: 3px solid var(--primary); }
+        .img-overlay h3 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
 
-        /* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
+        .img-overlay p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        footer { background: var(--dark); color: #888; padding: 40px 0; text-align: center; border-top: 3px solid var(--primary); }
+
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             .menu-toggle { display: flex; } 
             
@@ -86,16 +108,15 @@
                 text-align: center; 
                 transition: 0.4s; 
                 padding: 20px 0; 
-                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
                 border-top: 1px solid #333;
             }
 
             .nav-links.active { left: 0; }
             .nav-links li { margin: 15px 0; }
             
-            .header h1 { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; } /* Stack images neatly on small screens */
-            .img-box { height: 300px; }
+            .header h1 { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .img-box { height: 350px; }
         }
     </style>
 </head>
@@ -118,46 +139,67 @@
     </nav>
 
     <header class="header">
-        <h1>Our Portfolio</h1>
-        <p style="margin-top:10px; color: var(--primary);">Quality Steelwork & Professional Welding</p>
+        <h1>Workmanship Portfolio</h1>
+        <p style="margin-top:10px; color: var(--primary); letter-spacing: 1px;">Built to Last | Jeffrey's Bay Premier Steelwork</p>
     </header>
 
     <div class="container">
         <div class="grid">
+            
             <div class="img-box">
-                <img src="Portfolio1.png" alt="J-Bay Welding Project">
-                <div class="img-overlay">Security Gates</div>
+                <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Residential Carport J-Bay Welding">
+                <div class="img-overlay">
+                    <h3>Premium Carports</h3>
+                    <p>Custom galvanized steel residential structures.</p>
+                </div>
             </div>
 
             <div class="img-box">
-                <img src="Portfolio2.png" alt="J-Bay Welding Project">
-                <div class="img-overlay">Steel Fabrication</div>
+                <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Steel Fabrication Frame">
+                <div class="img-overlay">
+                    <h3>Steel Fabrication</h3>
+                    <p>Large-scale structural framing and precision alignment.</p>
+                </div>
             </div>
 
             <div class="img-box">
-                <img src="Portfolio3.png" alt="J-Bay Welding Project">
-                <div class="img-overlay">Custom Grills</div>
+                <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Automotive Welding Repair">
+                <div class="img-overlay">
+                    <h3>Specialized Repairs</h3>
+                    <p>Precision automotive and custom component welding.</p>
+                </div>
             </div>
 
             <div class="img-box">
-                <img src="Portfolio4.png" alt="J-Bay Welding Project">
-                <div class="img-overlay">Rust Prevention</div>
+                <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Custom Side Carport">
+                <div class="img-overlay">
+                    <h3>Space Optimization</h3>
+                    <p>Lean-to structures designed for narrow boundary lines.</p>
+                </div>
             </div>
 
             <div class="img-box">
-                <img src="Portfolio5.png" alt="J-Bay Welding Project">
-                <div class="img-overlay">Industrial Welding</div>
+                <img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif" alt="Commercial Shade Sail Structure">
+                <div class="img-overlay">
+                    <h3>Shade Structures</h3>
+                    <p>Heavy-duty commercial cantilever shade solutions.</p>
+                </div>
             </div>
 
             <div class="img-box">
-                <img src="Portfolio6.png" alt="J-Bay Welding Project">
-                <div class="img-overlay">Precision Engineering</div>
+                <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Rust Treatment and Welding">
+                <div class="img-overlay">
+                    <h3>Rust Restoration</h3>
+                    <p>Professional surface preparation and structural reinforcement.</p>
+                </div>
             </div>
+
         </div>
     </div>
 
     <footer>
         <p>&copy; 2026 J-Bay Welding | Jeffreys Bay | 066 354 4654</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">Specializing in Stainless, Mild Steel & Aluminum</p>
     </footer>
 
     <script>
