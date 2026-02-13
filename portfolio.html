@@ -6,107 +6,111 @@
     <title>Portfolio | J-Bay Welding</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; --primary-dark: #d35400; }
+        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--light); padding-top: 70px; }
+        body { background-color: var(--light); padding-top: 70px; overflow-x: hidden; }
         
+        /* Navbar */
         .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--dark); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
         .logo { font-size: 1.5rem; font-weight: bold; text-decoration: none; color: white; }
         .logo span { color: var(--primary); }
-        .nav-links { display: flex; list-style: none; }
-        .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
-        .nav-links li a:hover { color: var(--primary); }
         
-        .menu-toggle { display: none; background: var(--primary); color: var(--dark); width: 45px; height: 45px; border-radius: 5px; justify-content: center; align-items: center; font-size: 1.4rem; cursor: pointer; transition: 0.3s; }
+        /* Rolling Gallery Container */
+        .rolling-container {
+            width: 100%;
+            background: #000;
+            padding: 40px 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 4px solid var(--primary);
+            border-bottom: 4px solid var(--primary);
+            margin-top: 50px;
+        }
 
-        .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; border-bottom: 5px solid var(--primary); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 5%; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .img-box { height: 350px; background: #222; border-radius: 8px; overflow: hidden; position: relative; box-shadow: 0 10px 20px rgba(0,0,0,0.2); border: 2px solid #333; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .rolling-track {
+            display: flex;
+            width: calc(300px * 12); /* Doubled for seamless loop */
+            animation: scroll 30s linear infinite;
+        }
 
-        .img-overlay { position: absolute; bottom: 0; background: rgba(0,0,0,0.8); width: 100%; color: white; padding: 15px; text-align: center; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid var(--primary); }
+        .rolling-track:hover {
+            animation-play-state: paused;
+        }
 
+        .rolling-track img {
+            width: 300px;
+            height: 250px;
+            object-fit: cover;
+            margin: 0 10px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        .rolling-track img:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-320px * 6)); } /* Adjust based on img width + margin */
+        }
+
+        .header { background: var(--dark); color: white; padding: 60px 5%; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 5%; text-align: center; }
         footer { background: var(--dark); color: #888; padding: 30px 0; text-align: center; border-top: 3px solid var(--primary); }
 
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .menu-toggle { display: flex; } 
-            .nav-links { position: absolute; top: 70px; left: -100%; width: 100%; height: auto; background: var(--dark); flex-direction: column; text-align: center; transition: 0.4s; padding: 20px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2); border-top: 1px solid #333; }
-            .nav-links.active { left: 0; }
-            .nav-links li { margin: 15px 0; }
-            .header h1 { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; }
-            .img-box { height: 300px; }
+            .rolling-track img { width: 200px; height: 180px; }
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(calc(-220px * 6)); }
+            }
         }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
-        <a href="index.html" class="logo">J-BAY <span>WELDING</span></a>
-        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="maintenance.html">Maintenance</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <a href="#" class="logo">J-BAY <span>WELDING</span></a>
+        <div style="color: var(--primary); font-size: 0.8rem; letter-spacing: 1px;">PREMIUM FABRICATION</div>
     </nav>
 
     <header class="header">
-        <h1>Our Portfolio</h1>
-        <p style="margin-top:10px; color: var(--primary);">Quality Steelwork & Professional Welding</p>
+        <h1>Project Showcase</h1>
+        <p style="margin-top:10px; color: var(--primary);">Swipe or Hover to Explore Our Recent Work</p>
     </header>
 
+    <div class="rolling-container">
+        <div class="rolling-track">
+            <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Work 1">
+            <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Work 2">
+            <img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif" alt="Work 3">
+            <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Work 4">
+            <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Work 5">
+            <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Work 6">
+            <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Work 1">
+            <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Work 2">
+            <img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif" alt="Work 3">
+            <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Work 4">
+            <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Work 5">
+            <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Work 6">
+        </div>
+    </div>
+
     <div class="container">
-        <div class="grid">
-            <div class="img-box">
-                <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Carport Project">
-                <div class="img-overlay">Residential Carports</div>
-            </div>
-
-            <div class="img-box">
-                <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Steel Frame">
-                <div class="img-overlay">Structural Steel Framing</div>
-            </div>
-
-            <div class="img-box">
-                <img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif" alt="Shade Structure">
-                <div class="img-overlay">Shade Sail Supports</div>
-            </div>
-
-            <div class="img-box">
-                <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Boundary Carport">
-                <div class="img-overlay">Custom Boundary Carports</div>
-            </div>
-
-            <div class="img-box">
-                <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Technical Welding">
-                <div class="img-overlay">Technical Steel Repairs</div>
-            </div>
-
-            <div class="img-box">
-                <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Restoration">
-                <div class="img-overlay">Rust Restoration</div>
-            </div>
+        <h2 style="margin-bottom: 20px;">Quality You Can Trust</h2>
+        <p>Specializing in residential carports, industrial frames, and custom steel repairs in Jeffrey's Bay.</p>
+        <div style="margin-top: 30px;">
+            <a href="tel:0663544654" style="background: var(--primary); color: #000; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px;">CALL NOW: 066 354 4654</a>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 J-Bay Welding | Jeffreys Bay | 066 354 4654</p>
+        <p>&copy; 2026 J-Bay Welding | Jeffreys Bay</p>
     </footer>
 
-    <script>
-        const menu = document.querySelector('#mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
-        menu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = menu.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-    </script>
 </body>
 </html>
