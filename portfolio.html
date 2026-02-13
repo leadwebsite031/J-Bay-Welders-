@@ -6,140 +6,80 @@
     <title>J-Bay Welding | Professional Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- PROFESSIONAL THEME VARIABLES --- */
         :root { 
             --gold: #f39c12; 
-            --gold-glow: rgba(243, 156, 18, 0.3);
             --dark-bg: #0a0a0a; 
             --card-bg: #141414;
             --text-light: #f4f4f4;
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --nav-height: 80px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-        body { background-color: var(--dark-bg); color: var(--text-light); overflow-x: hidden; line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--dark-bg); color: var(--text-light); overflow-x: hidden; padding-top: var(--nav-height); }
 
-        /* --- MODERN NAVBAR --- */
+        /* --- NAVIGATION --- */
         .navbar { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 0 8%; background: rgba(10, 10, 10, 0.95); 
-            position: fixed; width: 100%; top: 0; height: 80px; z-index: 1000; 
+            padding: 0 8%; background: rgba(10, 10, 10, 0.98); 
+            position: fixed; width: 100%; top: 0; height: var(--nav-height); z-index: 2000; 
             border-bottom: 1px solid #222; backdrop-filter: blur(10px);
         }
         .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; color: white; letter-spacing: 2px; }
         .logo span { color: var(--gold); }
 
-        /* --- HERO SECTION --- */
-        .hero { 
-            padding: 160px 5% 60px; text-align: center; 
-            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        /* Desktop Tabs */
+        .nav-tabs { display: flex; list-style: none; gap: 30px; }
+        .nav-tabs a { 
+            color: white; text-decoration: none; font-size: 0.85rem; 
+            text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
+            transition: 0.3s; padding: 10px 0; border-bottom: 2px solid transparent;
         }
-        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 10px; }
-        .hero p { color: var(--gold); font-weight: 300; letter-spacing: 5px; font-size: 0.9rem; text-transform: uppercase; }
+        .nav-tabs a:hover { color: var(--gold); border-bottom: 2px solid var(--gold); }
 
-        /* --- PROFESSIONAL ROLLING SHOWCASE --- */
-        .showcase-label { padding: 40px 8% 10px; font-size: 0.8rem; letter-spacing: 3px; color: #555; text-transform: uppercase; }
+        /* Mobile Hamburger Icon */
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--gold); }
+
+        /* Mobile Slide-out Menu */
+        .mobile-menu {
+            position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+            background: #111; z-index: 3000; transition: 0.5s ease;
+            display: flex; flex-direction: column; padding: 100px 40px; gap: 25px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 1.5rem; text-transform: uppercase; font-weight: 700; }
+        .close-menu { position: absolute; top: 25px; right: 30px; font-size: 2rem; color: var(--gold); cursor: pointer; }
+        .overlay-bg { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2500; }
+        .overlay-bg.active { display: block; }
+
+        /* --- SHOWCASE --- */
+        .hero { padding: 80px 5% 40px; text-align: center; }
+        .hero h1 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 3px; }
         
-        .rolling-wrapper {
-            width: 100%;
-            padding: 20px 0 60px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Seamless Loop Animation */
-        .rolling-track {
-            display: flex;
-            width: calc(400px * 12); /* 6 images * 2 for loop */
-            animation: scroll 40s linear infinite;
-        }
-
+        .rolling-wrapper { width: 100%; padding: 40px 0; overflow: hidden; position: relative; }
+        .rolling-track { display: flex; width: calc(400px * 12); animation: scroll 40s linear infinite; }
         .rolling-track:hover { animation-play-state: paused; }
 
         .portfolio-item {
-            width: 400px;
-            height: 500px;
-            margin: 0 15px;
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            background: var(--card-bg);
-            border: 1px solid #222;
-            transition: var(--transition);
+            width: 400px; height: 450px; margin: 0 15px; position: relative;
+            border-radius: 8px; overflow: hidden; border: 1px solid #222;
         }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: var(--transition);
-        }
-
-        /* Hover Effects */
-        .portfolio-item:hover {
-            border-color: var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
-        }
-
-        .portfolio-item:hover img {
-            transform: scale(1.08);
-            filter: grayscale(0%);
-        }
-
-        .item-overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            padding: 30px 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .portfolio-item:hover .item-overlay {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .item-overlay h3 { color: var(--gold); font-size: 1.1rem; margin-bottom: 5px; }
-        .item-overlay p { font-size: 0.8rem; color: #ccc; }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .portfolio-item:hover img { transform: scale(1.1); }
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-430px * 6)); } /* (Width + Margin) * Number of unique images */
+            100% { transform: translateX(calc(-430px * 6)); }
         }
 
-        /* --- CONTACT CTA --- */
-        .cta-section {
-            padding: 80px 8%;
-            text-align: center;
-            background: #0f0f0f;
-            border-top: 1px solid #222;
-        }
-        .btn {
-            display: inline-block;
-            padding: 18px 40px;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        .btn:hover {
-            background: var(--gold);
-            color: #000;
-            box-shadow: 0 0 25px var(--gold-glow);
+        /* --- RESPONSIVE LOGIC --- */
+        @media (max-width: 900px) {
+            .nav-tabs { display: none; }
+            .hamburger { display: block; }
         }
 
-        footer { padding: 40px; text-align: center; color: #444; font-size: 0.8rem; letter-spacing: 1px; }
-
-        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
-            .portfolio-item { width: 280px; height: 380px; }
+            .portfolio-item { width: 280px; height: 350px; }
             @keyframes scroll {
                 0% { transform: translateX(0); }
                 100% { transform: translateX(calc(-310px * 6)); }
@@ -151,43 +91,46 @@
 
     <nav class="navbar">
         <a href="#" class="logo">J-BAY <span>WELDING</span></a>
-        <div style="font-size: 0.7rem; color: #666; letter-spacing: 2px;">EST. 2026</div>
+        
+        <ul class="nav-tabs">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="maintenance.html">Maintenance</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html" style="color: var(--gold);">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="hamburger" id="ham-icon">
+            <i class="fas fa-bars"></i>
+        </div>
     </nav>
+
+    <div class="overlay-bg" id="menu-overlay"></div>
+    <div class="mobile-menu" id="mobile-nav">
+        <div class="close-menu" id="close-btn">&times;</div>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="maintenance.html">Maintenance</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </div>
 
     <header class="hero">
         <h1>Mastery in Metal</h1>
-        <p>Structural Steel & Precision Engineering</p>
+        <p style="color: var(--gold); letter-spacing: 4px;">STRUCTURAL STEEL & PRECISION</p>
     </header>
-
-    <div class="showcase-label">Featured Projects</div>
 
     <section class="rolling-wrapper">
         <div class="rolling-track">
-            <div class="portfolio-item">
-                <img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif" alt="Carport">
-                <div class="item-overlay"><h3>Premium Carports</h3><p>Galvanized structural protection.</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif" alt="Frame">
-                <div class="item-overlay"><h3>Industrial Framing</h3><p>Heavy-duty steel fabrication.</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif" alt="Shade">
-                <div class="item-overlay"><h3>Shade Systems</h3><p>Commercial grade cantilever sails.</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif" alt="Boundary">
-                <div class="item-overlay"><h3>Custom Structures</h3><p>Boundary-line optimized builds.</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif" alt="Welding">
-                <div class="item-overlay"><h3>Precision Repairs</h3><p>Technical automotive welding.</p></div>
-            </div>
-            <div class="portfolio-item">
-                <img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif" alt="Restoration">
-                <div class="item-overlay"><h3>Rust Restoration</h3><p>Structural reinforcement & prep.</p></div>
-            </div>
-
+            <div class="portfolio-item"><img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif"></div>
+            <div class="portfolio-item"><img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif"></div>
+            <div class="portfolio-item"><img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif"></div>
+            <div class="portfolio-item"><img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif"></div>
+            <div class="portfolio-item"><img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif"></div>
+            <div class="portfolio-item"><img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif"></div>
+            
             <div class="portfolio-item"><img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif"></div>
             <div class="portfolio-item"><img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif"></div>
             <div class="portfolio-item"><img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif"></div>
@@ -197,14 +140,24 @@
         </div>
     </section>
 
-    <section class="cta-section">
-        <h2 style="margin-bottom: 30px; letter-spacing: 2px;">READY TO START YOUR PROJECT?</h2>
-        <a href="tel:0663544654" class="btn">Request a Quote</a>
-    </section>
+    <div style="text-align: center; padding: 60px 0;">
+        <a href="tel:0663544654" style="border: 1px solid var(--gold); color: var(--gold); padding: 15px 40px; text-decoration: none; font-weight: bold; letter-spacing: 2px;">CALL: 066 354 4654</a>
+    </div>
 
-    <footer>
-        <p>J-BAY WELDING &copy; 2026 | JEFFREYS BAY, SOUTH AFRICA</p>
-    </footer>
+    <script>
+        const hamIcon = document.getElementById('ham-icon');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const overlay = document.getElementById('menu-overlay');
 
+        function toggleMenu() {
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        hamIcon.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
 </body>
 </html>
