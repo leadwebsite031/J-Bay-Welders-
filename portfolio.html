@@ -64,6 +64,7 @@
         .slider-wrapper {
             overflow: hidden;
             border-radius: 12px;
+            min-height: 450px;
         }
 
         .portfolio-track {
@@ -80,6 +81,7 @@
             overflow: hidden;
             border: 1px solid #222;
             cursor: zoom-in;
+            background: #111; /* Skeleton loader background */
         }
 
         .portfolio-item img {
@@ -87,6 +89,7 @@
             height: 100%;
             object-fit: cover;
             transition: 0.5s;
+            display: block;
         }
 
         .portfolio-item:hover img { transform: scale(1.05); }
@@ -114,7 +117,7 @@
         .prev-btn { left: 10px; }
         .next-btn { right: 10px; }
 
-        /* --- LIGHTBOX (Enlarge Image) --- */
+        /* --- LIGHTBOX --- */
         .lightbox {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -154,12 +157,10 @@
         @media (max-width: 1024px) {
             .portfolio-item { min-width: calc(50% - 10px); }
         }
-
         @media (max-width: 900px) {
             .nav-tabs { display: none; }
             .hamburger { display: block; }
         }
-
         @media (max-width: 600px) {
             .portfolio-item { min-width: 100%; height: 350px; }
             .hero h1 { font-size: 1.8rem; }
@@ -209,14 +210,7 @@
         <button class="slide-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
         
         <div class="slider-wrapper">
-            <div class="portfolio-track" id="track">
-                <div class="portfolio-item"><img src="670f7e00-9a0a-486d-aba6-afbdbc67bde4.jfif"></div>
-                <div class="portfolio-item"><img src="e30e3876-2ef0-4f15-a31b-15fc7dfb771d.jfif"></div>
-                <div class="portfolio-item"><img src="01c067d7-d0a8-42e0-a27e-2720b5093913.jfif"></div>
-                <div class="portfolio-item"><img src="d3f0c532-fb59-463f-a8b6-1ea6833d3c90.jfif"></div>
-                <div class="portfolio-item"><img src="ee80ff71-f6d5-4130-b42e-8ebf534c7eb1.jfif"></div>
-                <div class="portfolio-item"><img src="1c920b66-5921-404c-86ca-6abea12dbd11.jfif"></div>
-            </div>
+            <div class="portfolio-track" id="track"></div>
         </div>
     </div>
 
@@ -239,7 +233,94 @@
     </footer>
 
     <script>
-        // Menu Logic
+        /**
+         * GITHUB API CONFIGURATION
+         * Change these to your actual GitHub info
+         */
+        const username = 'YOUR_GITHUB_USERNAME'; // e.g., 'jbaywelding'
+        const repo = 'YOUR_REPO_NAME';           // e.g., 'portfolio-assets'
+        const folderPath = '';                  // e.g., 'images' (leave empty if images are in root)
+
+        const track = document.getElementById('track');
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lb-img');
+        const lbClose = document.getElementById('lb-close');
+        let index = 0;
+
+        async function fetchGitHubImages() {
+            const apiUrl = `https://api.github.com/repos/${username}/${repo}/contents/${folderPath}`;
+            
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                // Filter for only .jfif files
+                const jfifFiles = data.filter(file => file.name.toLowerCase().endsWith('.jfif'));
+                
+                if (jfifFiles.length === 0) {
+                    track.innerHTML = '<p style="width:100%; text-align:center;">No images found. Please check your GitHub path.</p>';
+                    return;
+                }
+
+                track.innerHTML = ''; // Clear skeleton
+
+                jfifFiles.forEach(file => {
+                    const item = document.createElement('div');
+                    item.className = 'portfolio-item';
+                    
+                    const img = document.createElement('img');
+                    // Use download_url for the raw image source
+                    img.src = file.download_url;
+                    img.alt = "J-Bay Welding Portfolio Item";
+                    
+                    img.onclick = () => {
+                        lightbox.classList.add('active');
+                        lbImg.src = img.src;
+                    };
+
+                    item.appendChild(img);
+                    track.appendChild(item);
+                });
+
+            } catch (error) {
+                console.error('Error fetching images:', error);
+                track.innerHTML = '<p style="width:100%; text-align:center;">Error loading portfolio. Check internet connection.</p>';
+            }
+        }
+
+        // Slider Navigation Logic
+        function getVisibleItems() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 3;
+        }
+
+        function updateSlider() {
+            const gap = 20;
+            const items = document.querySelectorAll('.portfolio-item');
+            if (items.length > 0) {
+                const itemWidth = items[0].offsetWidth;
+                track.style.transform = `translateX(-${index * (itemWidth + gap)}px)`;
+            }
+        }
+
+        document.getElementById('nextBtn').onclick = () => {
+            const visible = getVisibleItems();
+            const total = document.querySelectorAll('.portfolio-item').length;
+            const max = total - visible;
+            index = (index < max) ? index + 1 : 0;
+            updateSlider();
+        };
+
+        document.getElementById('prevBtn').onclick = () => {
+            const visible = getVisibleItems();
+            const total = document.querySelectorAll('.portfolio-item').length;
+            const max = total - visible;
+            index = (index > 0) ? index - 1 : max;
+            updateSlider();
+        };
+
+        // Mobile Menu
         const hamIcon = document.getElementById('ham-icon');
         const closeBtn = document.getElementById('close-btn');
         const mobileNav = document.getElementById('mobile-nav');
@@ -247,57 +328,13 @@
         hamIcon.onclick = () => mobileNav.classList.add('active');
         closeBtn.onclick = () => mobileNav.classList.remove('active');
 
-        // Slider Logic
-        const track = document.getElementById('track');
-        const prev = document.getElementById('prevBtn');
-        const next = document.getElementById('nextBtn');
-        let index = 0;
-
-        function getVisibleItems() {
-            if (window.innerWidth <= 600) return 1;
-            if (window.innerWidth <= 1024) return 2;
-            return 3;
-        }
-
-        next.addEventListener('click', () => {
-            const visible = getVisibleItems();
-            const max = track.children.length - visible;
-            index = (index < max) ? index + 1 : 0;
-            updateSlider();
-        });
-
-        prev.addEventListener('click', () => {
-            const visible = getVisibleItems();
-            const max = track.children.length - visible;
-            index = (index > 0) ? index - 1 : max;
-            updateSlider();
-        });
-
-        function updateSlider() {
-            const gap = 20;
-            const itemWidth = track.children[0].offsetWidth;
-            track.style.transform = `translateX(-${index * (itemWidth + gap)}px)`;
-        }
-
-        window.addEventListener('resize', () => {
-            index = 0;
-            updateSlider();
-        });
-
-        // Lightbox Logic
-        const lightbox = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lb-img');
-        const lbClose = document.getElementById('lb-close');
-
-        document.querySelectorAll('.portfolio-item img').forEach(img => {
-            img.onclick = () => {
-                lightbox.classList.add('active');
-                lbImg.src = img.src;
-            };
-        });
-
+        // Lightbox Close
         lbClose.onclick = () => lightbox.classList.remove('active');
         lightbox.onclick = (e) => { if(e.target !== lbImg) lightbox.classList.remove('active'); };
+
+        // Initialize
+        window.onload = fetchGitHubImages;
+        window.onresize = () => { index = 0; updateSlider(); };
     </script>
 </body>
 </html>
