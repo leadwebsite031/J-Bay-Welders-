@@ -6,28 +6,27 @@
     <title>J-Bay Welding | Professional Steel Fabrication</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #f39c12; --dark: #1a1a1a; --light: #f4f4f4; --white: #ffffff; --primary-dark: #d35400; }
+        :root { --primary: #f39c12; --dark: #000000; --light: #f4f4f4; --white: #ffffff; --primary-dark: #d35400; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--light); padding-top: 70px; scroll-behavior: smooth; }
         
-        /* --- Navbar --- */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: var(--black); color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        /* --- Navbar (Set to Solid Black) --- */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 5%; background: #000000; color: white; position: fixed; width: 100%; top: 0; left: 0; height: 70px; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         
-        /* Logo Integration */
+        /* Logo Container */
         .logo-container { display: flex; align-items: center; text-decoration: none; height: 100%; }
-        .logo-img { height: 60px; width: auto; margin-right: 10px; }
-        .logo-text { font-size: 1.2rem; font-weight: bold; color: white; letter-spacing: 1px; line-height: 1; }
-        .logo-text span { color: var(--primary); display: block; font-size: 0.8rem; opacity: 0.8; }
+        .logo-img { height: 60px; width: auto; margin-right: 12px; }
+        .logo-text { font-size: 1.2rem; font-weight: bold; color: white; letter-spacing: 1px; line-height: 1.2; }
+        .logo-text span { color: var(--primary); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .nav-links { display: flex; list-style: none; }
         .nav-links li a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
         .nav-links li a:hover { color: var(--primary); }
 
-        /* Mobile Menu Toggle */
         .menu-toggle { 
             display: none; 
             background: var(--primary); 
-            color: var(--black); 
+            color: #000; 
             width: 45px; 
             height: 45px; 
             border-radius: 5px; 
@@ -35,7 +34,6 @@
             align-items: center; 
             font-size: 1.4rem; 
             cursor: pointer; 
-            transition: 0.3s;
         }
         
         /* --- Hero Section --- */
@@ -51,37 +49,33 @@
 
         .btn { background: var(--primary); color: white; padding: 14px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; display: inline-block; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; border: none; cursor: pointer; }
         
-        /* --- Container & Grid --- */
+        /* --- Grid Section --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 60px 5%; }
         .section-intro { text-align: center; margin-bottom: 40px; }
-        .section-intro h2 { font-size: 2.2rem; color: var(--dark); margin-bottom: 10px; }
+        .section-intro h2 { font-size: 2.2rem; color: #1a1a1a; margin-bottom: 10px; }
         .section-intro .bar { width: 60px; height: 4px; background: var(--primary); margin: 0 auto; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .card { background: white; padding: 35px 25px; border-bottom: 5px solid var(--primary); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.4s; border-radius: 4px; }
         .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; display: block; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--dark); }
-        .card p { color: #666; font-size: 1rem; line-height: 1.5; }
 
-        /* --- Footer & Social Icons --- */
-        footer { background: var(--dark); color: #ffffff; padding: 50px 0 30px; text-align: center; border-top: 3px solid var(--primary); }
+        /* --- Footer & Bottom Socials --- */
+        footer { background: #000000; color: #ffffff; padding: 50px 0 30px; text-align: center; border-top: 3px solid var(--primary); }
         .footer-socials { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
         .footer-socials a { color: var(--white); background: rgba(255,255,255,0.1); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; transition: 0.3s; text-decoration: none; }
-        .footer-socials a:hover { background: var(--primary); color: var(--dark); transform: translateY(-3px); }
-        .copyright { color: #888; font-size: 0.9rem; margin-top: 10px; }
+        .footer-socials a:hover { background: var(--primary); color: #000; transform: translateY(-3px); }
+        .copyright { color: #666; font-size: 0.85rem; margin-top: 15px; }
 
-        /* --- Mobile Responsive Rules --- */
+        /* --- Mobile Rules --- */
         @media (max-width: 768px) {
             .menu-toggle { display: flex; }
             .nav-links { 
-                position: absolute; top: 70px; left: -100%; width: 100%; height: auto; 
-                background: var(--dark); flex-direction: column; text-align: center; 
-                transition: 0.4s; padding: 20px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                border-top: 1px solid #333;
+                position: absolute; top: 70px; left: -100%; width: 100%; 
+                background: #000000; flex-direction: column; text-align: center; 
+                transition: 0.4s; padding: 20px 0; border-top: 1px solid #222;
             }
             .nav-links.active { left: 0; }
             .nav-links li { margin: 15px 0; }
-            .hero { height: 80vh; }
             .logo-text { font-size: 1rem; }
         }
 
@@ -95,7 +89,7 @@
     <nav class="navbar">
         <a href="index.html" class="logo-container">
             <img src="7ba60593-2e62-43ab-81d6-8eb08854cfbf.jfif" alt="J-Bay Welding Logo" class="logo-img">
-            <div class="logo-text">J-BAY WELDING<span>STEEL WORK YOU CAN TRUST</span></div>
+            <div class="logo-text">J-BAY WELDING<span>Steel Work You Can Trust</span></div>
         </a>
         
         <div class="menu-toggle" id="mobile-menu">
@@ -126,39 +120,33 @@
 
     <div class="container">
         <div class="section-intro">
-            <h2>Why Choose J-Bay Welding?</h2>
+            <h2>Our Standards</h2>
             <div class="bar"></div>
         </div>
         <div class="grid">
             <div class="card">
                 <i class="fas fa-tools"></i>
                 <h3>Reliable Service</h3>
-                <p>We respect your time. We show up as scheduled and get the job done right the first time.</p>
+                <p>We show up as scheduled and get the job done right the first time.</p>
             </div>
             <div class="card">
                 <i class="fas fa-shield-alt"></i>
                 <h3>Quality Materials</h3>
-                <p>Industrial-grade steel and protective finishes for long-lasting results in salt air.</p>
+                <p>Industrial-grade steel for long-lasting results in salt air.</p>
             </div>
             <div class="card">
                 <i class="fas fa-hammer"></i>
                 <h3>Expert Craft</h3>
-                <p>From security gates to intricate decorative steelwork tailored to your vision.</p>
+                <p>From security gates to intricate decorative steelwork.</p>
             </div>
         </div>
     </div>
 
     <footer>
         <div class="footer-socials">
-            <a href="https://facebook.com/YOUR_FB_PAGE_LINK" target="_blank" title="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://wa.me/27663544654" target="_blank" title="WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-            <a href="#" target="_blank" title="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
+            <a href="https://facebook.com/YOUR_PAGE" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/27663544654" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
         <p>066 354 4654 | J-Bay, Eastern Cape</p>
         <p class="copyright">&copy; 2026 J-Bay Welding. All Rights Reserved.</p>
@@ -177,6 +165,3 @@
     </script>
 </body>
 </html>
-
-
-
